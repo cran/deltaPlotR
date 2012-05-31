@@ -1,0 +1,12 @@
+citHeader("To cite package 'deltaPlotR' in publications use:")
+
+citEntry(entry = "Manual",
+title = "deltaPlotR: Identification of dichotomous differential item functioning (DIF) using Angoff's Delta Plot method",
+author = personList(as.person("David Magis"),as.person("Bruno Facon")),
+year = "2012",
+note = paste("R package version ",packageDescription("deltaPlot")$Version,".",sep=""),
+textVersion  = paste("David Magis and Bruno Facon (2012). ", 
+"deltaPlotR: Identification of dichotomous differential item functioning (DIF) using Angoff's Delta Plot method. ",
+"R package version ",packageDescription("deltaPlot")$Version,".",sep="")
+)
+
