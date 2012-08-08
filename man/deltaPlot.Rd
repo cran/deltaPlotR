@@ -131,8 +131,7 @@ The threshold for flaging items as DIF can be of two types and is specified by t
 \enumerate{
 \item It can be fixed to some arbitrary positive value by the user, for instance 1.5 (Angoff and Ford, 1973). In this 
 case, \code{thr} takes the required numeric threshold value.
-\item Alternatively, it can be derived from the bivariate normal approximation of the Delta points (Magis and Facon, in
-press). In this case, \code{thr} must be given the character value \code{"norm"} (which is the default value).
+\item Alternatively, it can be derived from the bivariate normal approximation of the Delta points (Magis and Facon, 2012). In this case, \code{thr} must be given the character value \code{"norm"} (which is the default value).
 This threshold equals
 \deqn{\Phi^{-1}(1-\alpha/2) \; \sqrt{\frac{b^2\,{s_0}^2-2\,b\,s_{01}+{s_1}^2}{b^2+1}}}
 where \eqn{\Phi} is the density of the standard normal distribution, \eqn{\alpha} is the significance level (set by the
