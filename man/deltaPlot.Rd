@@ -166,13 +166,13 @@ modified) but only the slope parameter is adjusted to lessen the impact of DIF i
 \item Method 3 (\code{purType=="IPP3"}): all adjusted parameters are plugged in the threshold formula. This approach
 completely discards the effect of items flagged as DIF from the computation of the threshold.
 }
-See Magis and Facon (in press) for further details. Note that purification can also be performed with fixed threshold (i.e.
+See Magis and Facon (2013) for further details. Note that purification can also be performed with fixed threshold (i.e.
 specified by the user), but then only IPP1 process is performed.
 
 In order to avoid possible infinite loops in the purification process, a maximal number of iterations must be specified
 through the argument \code{maxIter}. The default maximal number of iterations is 10. 
 
-The output contains all inpout information, the Delta scores and perpendicular distances, the parameter of the major axis
+The output contains all input information, the Delta scores and perpendicular distances, the parameter of the major axis
 and the items flagged as DIF (if none, a character sentence is returned). In addition, the detection threshold and the
 type of threshold (fixed or normal approximation) is provided. 
 
@@ -196,10 +196,10 @@ path is required). By default, the output will be saved in the current working d
 Angoff, W. H. and Ford, S. F. (1973). Item-race interaction on a test of scholastic aptitude. \emph{Journal of
 Educational Measurement}, 10, 95-106.
 
-Magis, D., and Facon, B. (in press). Item purification does not always improve DIF detection: a counter-example with Angoff's Delta plot. \emph{Educational and Psychological Measurement}.
-
 Magis, D., and Facon, B. (2012). Angoff's Delta method revisited: improving the DIF detection under small samples.
 \emph{British Journal of Mathematical and Statistical Psychology, 65}, 302-321.
+
+Magis, D., and Facon, B. (2013). Item purification does not always improve DIF detection: a counter-example with Angoff's Delta plot. \emph{Educational and Psychological Measurement, 73}, 293-311.
 }
  
 

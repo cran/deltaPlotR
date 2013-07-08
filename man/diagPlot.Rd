@@ -83,10 +83,10 @@ practical example.
 Angoff, W. H. and Ford, S. F. (1973). Item-race interaction on a test of scholastic aptitude. \emph{Journal of
 Educational Measurement}, 10, 95-106.
 
-Magis, D., and Facon, B. (in press). Item purification does not always improve DIF detection: a counter-example with Angoff's Delta plot. \emph{Educational and Psychological Measurement}.
-
 Magis, D., and Facon, B. (2012). Angoff's Delta method revisited: improving the DIF detection under small samples.
 \emph{British Journal of Mathematical and Statistical Psychology, 65}, 302-321.
+
+Magis, D., and Facon, B. (2013). Item purification does not always improve DIF detection: a counter-example with Angoff's Delta plot. \emph{Educational and Psychological Measurement, 73}, 293-311.
 }
  
 

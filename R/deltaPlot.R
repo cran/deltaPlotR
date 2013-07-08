@@ -4,6 +4,7 @@ if (is.null(test)) stop("'type' must be either 'response','prop' or 'delta'",cal
 test2<-switch(extreme,constraint=1,add=2)
 if (is.null(test2)) stop("'extreme' must be either 'constraint' or 'add'",call.=FALSE)
 if (test>1 & extreme=="add") stop("'extreme' cannot be 'add' when 'type' is not 'response'",call.=FALSE)
+if (test>1 & ncol(data)>2) stop("'data' should not have more than two columns when 'type' is not 'response'",call.=FALSE)
 internalDelta <- function(){
 if (test==1){
 if (is.character(group)){

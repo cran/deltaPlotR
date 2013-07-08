@@ -7,6 +7,21 @@
 
 
 ------------------------------------------
+- Changes in deltaPlotR 1.2 (2013-07-08) -
+------------------------------------------
+
+MINOR UPDATES
+
+  o  A warning message has been added to avoid using the
+     'prop' or 'delta' value of the 'type' argument when
+     the full item response matrix is provided to the
+     'data' argument.
+  o  Several references were updated.
+  o  Some typos were fixed.
+
+
+
+------------------------------------------
 - Changes in deltaPlotR 1.1 (2012-08-08) -
 ------------------------------------------
 
