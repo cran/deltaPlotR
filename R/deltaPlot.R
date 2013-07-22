@@ -1,159 +1,202 @@
-deltaPlot<-function(data,type="response",group,focal.name,thr="norm",purify=FALSE,purType="IPP1",maxIter=10,alpha=0.05,extreme="constraint",const.range = c(0.001, 0.999), nrAdd = 1,save.output=FALSE,output=c("out","default")){
-test<-switch(type,response=1,prop=2,delta=3)
-if (is.null(test)) stop("'type' must be either 'response','prop' or 'delta'",call.=FALSE)
-test2<-switch(extreme,constraint=1,add=2)
-if (is.null(test2)) stop("'extreme' must be either 'constraint' or 'add'",call.=FALSE)
-if (test>1 & extreme=="add") stop("'extreme' cannot be 'add' when 'type' is not 'response'",call.=FALSE)
-if (test>1 & ncol(data)>2) stop("'data' should not have more than two columns when 'type' is not 'response'",call.=FALSE)
-internalDelta <- function(){
-if (test==1){
-if (is.character(group)){
-DATA<-data[,colnames(data)!=group]
-GROUP<-data[,colnames(data)==group]
+deltaPlot<-function (data, type = "response", group, focal.name, thr = "norm", 
+    purify = FALSE, purType = "IPP1", maxIter = 10, alpha = 0.05, 
+    extreme = "constraint", const.range = c(0.001, 0.999), nrAdd = 1, 
+    save.output = FALSE, output = c("out", "default")) 
+{
+    test <- switch(type, response = 1, prop = 2, delta = 3)
+    if (is.null(test)) 
+        stop("'type' must be either 'response','prop' or 'delta'", 
+            call. = FALSE)
+    test2 <- switch(extreme, constraint = 1, add = 2)
+    if (is.null(test2)) 
+        stop("'extreme' must be either 'constraint' or 'add'", 
+            call. = FALSE)
+    if (test > 1 & extreme == "add") 
+        stop("'extreme' cannot be 'add' when 'type' is not 'response'", 
+            call. = FALSE)
+    if (test > 1 & ncol(data) > 2) 
+        stop("'data' should not have more than two columns when 'type' is not 'response'", 
+            call. = FALSE)
+    internalDelta <- function() {
+        if (test == 1) {
+            if (is.character(group)) {
+                DATA <- data[, colnames(data) != group]
+                GROUP <- data[, colnames(data) == group]
+            }
+            else {
+                DATA <- data[, (1:ncol(data)) != group]
+                GROUP <- data[, group]
+            }
+            props <- matrix(NA, ncol(DATA), 2)
+            for (i in 1:ncol(DATA)) {
+                props[i, 1] <- mean(DATA[GROUP != focal.name, 
+                  i], na.rm = TRUE)
+                props[i, 2] <- mean(DATA[GROUP == focal.name, 
+                  i], na.rm = TRUE)
+            }
+            adjProps <- adjustExtreme(data = DATA, group = GROUP, 
+                focal.name = focal.name, prop = props, method = extreme, 
+                const.range = const.range, nrAdd = nrAdd)$adj.prop
+        }
+        if (test == 2) {
+            props <- data
+            adjProps <- adjustExtreme(data = NULL, group = NULL, 
+                focal.name = NULL, prop = props, method = extreme, 
+                const.range = const.range, nrAdd = nrAdd)$adj.prop
+        }
+        if (test == 3) 
+            Deltas <- data
+        else Deltas <- 4 * qnorm(1 - adjProps) + 13
+        SIG <- cov(Deltas)
+        M <- colMeans(Deltas)
+        b1 <- (SIG[2, 2] - SIG[1, 1] - sqrt((SIG[2, 2] - SIG[1, 
+            1])^2 + 4 * SIG[1, 2]^2))/(2 * SIG[1, 2])
+        b2 <- (SIG[2, 2] - SIG[1, 1] + sqrt((SIG[2, 2] - SIG[1, 
+            1])^2 + 4 * SIG[1, 2]^2))/(2 * SIG[1, 2])
+        b <- max(c(b1, b2))
+        a <- M[2] - b * M[1]
+        C <- c(b, -1)/sqrt(b^2 + 1)
+        epsilon <- a/sqrt(b^2 + 1)
+        DIST <- Deltas %*% C + epsilon
+if (sum(is.na(DIST))>0) 
+stop("Perpendicular distances cannot be computed - one set of Delta scores is probably constant",call.=FALSE)
+
+        if (thr == "norm") {
+            mat <- t(C) %*% SIG %*% C
+            Q <- qnorm(1 - alpha/2, 0, sqrt(mat))
+            rule <- "norm"
+        }
+        else {
+            Q <- abs(thr)
+            rule <- "fixed"
+        }
+        if (max(abs(DIST)) <= Q) 
+            DIFitems <- "no DIF item detected"
+        else DIFitems <- (1:nrow(Deltas))[abs(DIST) > Q]
+        if (test < 3) {
+            stats <- props
+            stats2 <- adjProps
+        }
+        else stats <- stats2 <- NA
+        if (!purify) 
+            RES <- list(Props = stats, adjProps = stats2, Deltas = Deltas, 
+                Dist = DIST, axis.par = c(a, b), thr = Q, rule = rule, 
+                DIFitems = DIFitems, adjust.extreme = extreme, 
+                const.range = const.range, nrAdd = nrAdd, purify = purify, 
+                alpha = alpha, save.output = save.output, output = output)
+        else {
+            if (is.character(DIFitems)) 
+                RES <- list(Props = stats, adjProps = stats2, 
+                  Deltas = Deltas, Dist = DIST, axis.par = c(a, 
+                    b), nrIter = 1, maxIter = maxIter, convergence = TRUE, 
+                  thr = Q, rule = rule, purType = purType, DIFitems = DIFitems, 
+                  adjust.extreme = extreme, const.range = const.range, 
+                  nrAdd = nrAdd, purify = purify, alpha = alpha, 
+                  save.output = save.output, output = output)
+            else {
+                convergence <- FALSE
+                iter <- 1
+                dif <- DIFitems
+                difPur <- rep(0, nrow(Deltas))
+                difPur[DIFitems] <- 1
+                Qseries <- Q
+                pars <- c(a, b)
+                allDist <- DIST
+                repeat {
+                  iter <- iter + 1
+                  if (iter > maxIter) 
+                    break
+                  else {
+                    nodif <- NULL
+                    for (i in 1:nrow(Deltas)) {
+                      if (sum(i == dif) == 0) 
+                        nodif <- c(nodif, i)
+                    }
+                    DeltaProv <- cbind(Deltas[nodif, 1], Deltas[nodif, 
+                      2])
+                    SSIG <- cov(DeltaProv)
+                    MM <- colMeans(DeltaProv)
+                    bb1 <- (SSIG[2, 2] - SSIG[1, 1] - sqrt((SSIG[2, 
+                      2] - SSIG[1, 1])^2 + 4 * SSIG[1, 2]^2))/(2 * 
+                      SSIG[1, 2])
+                    bb2 <- (SSIG[2, 2] - SSIG[1, 1] + sqrt((SSIG[2, 
+                      2] - SSIG[1, 1])^2 + 4 * SSIG[1, 2]^2))/(2 * 
+                      SSIG[1, 2])
+                    bb <- max(c(bb1, bb2))
+                    aa <- MM[2] - bb * MM[1]
+                    C <- c(bb, -1)/sqrt(bb^2 + 1)
+                    epsilon <- aa/sqrt(bb^2 + 1)
+                    DIST2 <- Deltas %*% C + epsilon
+                    if (thr == "norm") {
+                      if (purType == "IPP1") {
+                        Q <- Qseries[1]
+                        rule <- "norm"
+                      }
+                      else {
+                        if (purType == "IPP3") {
+                          mat <- t(C) %*% SSIG %*% C
+                          Q <- qnorm(1 - alpha/2, 0, sqrt(mat))
+                          rule <- "norm"
+                        }
+                        else {
+                          mat <- t(C) %*% SIG %*% C
+                          Q <- qnorm(1 - alpha/2, 0, sqrt(mat))
+                          rule <- "norm"
+                        }
+                      }
+                    }
+                    else {
+                      Q <- abs(thr)
+                      rule <- "fixed"
+                      purType <- "IPP1"
+                    }
+                    if (max(abs(DIST2)) <= Q) 
+                      dif2 <- "no DIF item detected"
+                    else dif2 <- (1:nrow(Deltas))[abs(DIST2) > 
+                      Q]
+                    difPur <- rbind(difPur, rep(0, nrow(Deltas)))
+                    if (!is.character(dif2)) 
+                      difPur[iter, dif2] <- 1
+                    Qseries <- c(Qseries, Q)
+                    pars <- rbind(pars, c(aa, bb))
+                    allDist <- cbind(allDist, DIST2)
+                    if (length(dif) != length(dif2)) 
+                      dif <- dif2
+                    else {
+                      if (sum(abs(difPur[iter, ] - difPur[iter - 
+                        1, ])) == 0) {
+                        convergence <- TRUE
+                        dif <- dif2
+                        break
+                      }
+                      else dif <- dif2
+                    }
+                  }
+                }
+                RES <- list(Props = stats, adjProps = stats2, 
+                  Deltas = Deltas, Dist = allDist, axis.par = pars, 
+                  nrIter = nrow(difPur), maxIter = maxIter, convergence = convergence, 
+                  difPur = difPur, thr = Qseries, rule = rule, 
+                  purType = purType, DIFitems = dif, adjust.extreme = extreme, 
+                  const.range = const.range, nrAdd = nrAdd, purify = purify, 
+                  alpha = alpha, save.output = save.output, output = output)
+            }
+        }
+        class(RES) <- "deltaPlot"
+        return(RES)
+    }
+    resToReturn <- internalDelta()
+    if (save.output == TRUE) {
+        if (output[2] == "default") 
+            wd <- paste(getwd(), "/", sep = "")
+        else wd <- output[2]
+        fileName <- paste(wd, output[1], ".txt", sep = "")
+        capture.output(resToReturn, file = fileName)
+    }
+    return(resToReturn)
 }
-else{
-DATA<-data[,(1:ncol(data))!=group]
-GROUP<-data[,group]
-}
-props<-matrix(NA,ncol(DATA),2)
-for (i in 1:ncol(DATA)){
-props[i,1]<-mean(DATA[GROUP!=focal.name,i],na.rm=TRUE)
-props[i,2]<-mean(DATA[GROUP==focal.name,i],na.rm=TRUE)
-}
-adjProps<-adjustExtreme(data=DATA,group=GROUP,focal.name=focal.name,prop=props,method=extreme,const.range=const.range,nrAdd=nrAdd)$adj.prop
-}
-if (test==2) {
-props<-data
-adjProps<-adjustExtreme(data=NULL,group=NULL,focal.name=NULL,prop=props,method=extreme,const.range=const.range,nrAdd=nrAdd)$adj.prop
-}
-if (test==3) Deltas<-data
-else Deltas<-4*qnorm(1-adjProps)+13
-SIG<-cov(Deltas)
-M<-colMeans(Deltas)
-b1<-(SIG[2,2]-SIG[1,1]-sqrt((SIG[2,2]-SIG[1,1])^2+4*SIG[1,2]^2))/(2*SIG[1,2])
-b2<-(SIG[2,2]-SIG[1,1]+sqrt((SIG[2,2]-SIG[1,1])^2+4*SIG[1,2]^2))/(2*SIG[1,2])
-b<-max(c(b1,b2))
-a<-M[2]-b*M[1]
-C<-c(b,-1)/sqrt(b^2+1)
-epsilon<-a/sqrt(b^2+1)
-DIST<-Deltas%*%C+epsilon
-if (thr=="norm"){
-mat<-t(C)%*%SIG%*%C
-Q<-qnorm(1-alpha/2,0,sqrt(mat))
-rule<-"norm"
-}
-else {
-Q<-abs(thr)
-rule<-"fixed"
-}
-if (max(abs(DIST))<=Q) DIFitems<-"no DIF item detected"
-else DIFitems<-(1:nrow(Deltas))[abs(DIST)>Q]
-if (test<3){
-stats<-props
-stats2<-adjProps
-}
-else stats<-stats2<-NA
-if (!purify)
-RES<-list(Props=stats,adjProps=stats2,Deltas=Deltas,Dist=DIST,
-axis.par=c(a,b),thr=Q,rule=rule,DIFitems=DIFitems,adjust.extreme=extreme,
-const.range = const.range, nrAdd = nrAdd,
-purify=purify,alpha=alpha,save.output=save.output,output=output)
-else {
-if (is.character(DIFitems))
-RES<-list(Props=stats,adjProps=stats2,Deltas=Deltas,Dist=DIST,
-axis.par=c(a,b),nrIter=1,maxIter=maxIter,
-convergence=TRUE,thr=Q,rule=rule,purType=purType,DIFitems=DIFitems,adjust.extreme=extreme,
-const.range = const.range, nrAdd = nrAdd,
-purify=purify,alpha=alpha,save.output=save.output,output=output)
-else{
-convergence<-FALSE
-iter<-1
-dif<-DIFitems
-difPur<-rep(0,nrow(Deltas))
-difPur[DIFitems]<-1
-Qseries<-Q
-pars<-c(a,b)
-allDist<-DIST
-repeat{
-iter<-iter+1
-if (iter>maxIter) break
-else{
-nodif<-NULL
-for (i in 1:nrow(Deltas)){
-if (sum(i==dif)==0) 
-nodif<-c(nodif,i)
-}
-DeltaProv<-cbind(Deltas[nodif,1],Deltas[nodif,2])
-SSIG<-cov(DeltaProv)
-MM<-colMeans(DeltaProv)
-bb1<-(SSIG[2,2]-SSIG[1,1]-sqrt((SSIG[2,2]-SSIG[1,1])^2+4*SSIG[1,2]^2))/(2*SSIG[1,2])
-bb2<-(SSIG[2,2]-SSIG[1,1]+sqrt((SSIG[2,2]-SSIG[1,1])^2+4*SSIG[1,2]^2))/(2*SSIG[1,2])
-bb<-max(c(bb1,bb2))
-aa<-MM[2]-bb*MM[1]
-C<-c(bb,-1)/sqrt(bb^2+1)
-epsilon<-aa/sqrt(bb^2+1)
-DIST2<-Deltas%*%C+epsilon
-if (thr=="norm"){
-if (purType=="IPP1") {
-Q<-Qseries[1]
-rule<-"norm"
-}
-else{
-if (purType=="IPP3"){
-mat<-t(C)%*%SSIG%*%C
-Q<-qnorm(1-alpha/2,0,sqrt(mat))
-rule<-"norm"
-}
-else{
-mat<-t(C)%*%SIG%*%C
-Q<-qnorm(1-alpha/2,0,sqrt(mat))
-rule<-"norm"
-}
-}
-}
-else {
-Q<-abs(thr)
-rule<-"fixed"
-purType<-"IPP1"
-}
-if (max(abs(DIST2))<=Q) dif2<-"no DIF item detected"
-else dif2<-(1:nrow(Deltas))[abs(DIST2)>Q]
-difPur<-rbind(difPur, rep(0, nrow(Deltas)))
-if (!is.character(dif2)) difPur[iter, dif2]<-1
-Qseries<-c(Qseries,Q)
-pars<-rbind(pars,c(aa,bb))
-allDist<-cbind(allDist,DIST2)
-if (length(dif) != length(dif2)) dif<-dif2
-else {
-if (sum(abs(difPur[iter,]-difPur[iter-1,]))==0){
-convergence<-TRUE
-dif<-dif2
-break
-}
-else dif<-dif2
-}
-}
-}
-RES<-list(Props=stats,adjProps=stats2,Deltas=Deltas,Dist=allDist,
-axis.par=pars,nrIter=nrow(difPur),maxIter=maxIter,
-convergence=convergence,difPur=difPur,thr=Qseries,rule=rule,purType=purType,DIFitems=dif,adjust.extreme=extreme,
-const.range = const.range, nrAdd = nrAdd,
-purify=purify,alpha=alpha,save.output=save.output,output=output)
-}
-}
-class(RES)<-"deltaPlot"
-return(RES)
-}
-resToReturn <- internalDelta()
-if (save.output == TRUE) {
-if (output[2] == "default") 
-wd <- paste(getwd(), "/", sep = "")
-else wd <- output[2]
-fileName <- paste(wd, output[1], ".txt", sep = "")
-capture.output(resToReturn, file = fileName)
-}
-return(resToReturn)
-}
+
+
 
 
 
@@ -377,3 +420,4 @@ myBool<-ifelse(!res$purify,TRUE,ifelse(res$nrIter==1,TRUE,FALSE))
             " '", fileName, "'", "\n", "\n", sep = "")
     }
 }
+

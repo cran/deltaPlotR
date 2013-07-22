@@ -7,6 +7,25 @@
 
 
 ------------------------------------------
+- Changes in deltaPlotR 1.3 (2013-07-22) -
+------------------------------------------
+
+MINOR UPDATES
+
+  o  A warning message has been added when the 
+     proportions of corerct responses (or Delta scores)
+     are constant in at least one of the groups of
+     respondents. In this case the perpendicular 
+     distances cannot be computed (since variances are
+     equal to zero). This is highly practically 
+     implausible but this would lead to an error message. 
+     Many thanks to an anonymous reviewer who pointed 
+     out this issue.
+  o  Some typos were fixed.
+
+
+
+------------------------------------------
 - Changes in deltaPlotR 1.2 (2013-07-08) -
 ------------------------------------------
 

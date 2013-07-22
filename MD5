@@ -1,12 +1,11 @@
-a30e94b1c24a23d5cc8e241e9b61185a *DESCRIPTION
+f63fabea35df440bfa8e029f44b9cdfe *DESCRIPTION
 87e8c2a1f3f1d5b29ebd4c49aa9c2962 *NAMESPACE
-bdbc39cbcbebbe725ef9c0118a1a9abf *NEWS
+0161155079d2cac5d96576a26e20270d *NEWS
 d35c86e42a5001dbe212c9bc48bb31bc *R/adjustExtreme.R
-907d25bd7174c7e15fb64793da7013ea *R/deltaPlot.R
+be77764a2419152184fbb3158c034374 *R/deltaPlot.R
 bc32fc2cff76cc773c465f5c09648749 *R/diagPlot.R
 b661b5d7d3a057ab822193c0f1439a7d *data/verbal.txt.gz
-d5cca8df408ac078ace3b69acb4aa2c5 *inst/CITATION
-27d85cca063c27f35cc43dfe8ae0ed11 *inst/doc/deltaPlotR-manual.pdf
+e529d6e3bda2da7a6fb24077fff48ad0 *inst/CITATION
 32809b0718dfbfebb860bcbe465ed700 *man/adjustExtreme.Rd
 3f050fbbfc139d98af0c9d8540b059fc *man/deltaPlot.Rd
 05035b9c8157b9be8984428517f0adf4 *man/deltaPlotR-package.Rd
