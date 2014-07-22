@@ -1,12 +1,20 @@
-citHeader("To cite package 'deltaPlotR' in publications use:")
+citHeader("To cite deltaPlotR in publications use:")
 
-citEntry(entry = "Manual",
-title = "deltaPlotR: Identification of dichotomous differential item functioning (DIF) using Angoff's Delta Plot method",
-author = personList(as.person("David Magis"),as.person("Bruno Facon")),
-year = "2013",
-note = paste("R package version ",packageDescription("deltaPlotR")$Version,".",sep=""),
-textVersion  = paste("David Magis and Bruno Facon (2013). ", 
-"deltaPlotR: Identification of dichotomous differential item functioning (DIF) using Angoff's Delta Plot method. ",
-"R package version ",packageDescription("deltaPlotR")$Version,".",sep="")
+citEntry(entry = "Article",
+  title        = "{deltaPlotR}: An {R} Package for Differential Item Functioning Analysis with Angoff's Delta Plot",
+  author       = personList(as.person("David Magis"),
+                   as.person("Bruno Facon")),
+  journal      = "Journal of Statistical Software, Code Snippets",
+  year         = "2014",
+  volume       = "59",
+  number       = "1",
+  pages        = "1--19",
+  url          = "http://www.jstatsoft.org/v59/c01/",
+
+  textVersion  =
+  paste("David Magis, Bruno Facon (2014).",
+        "deltaPlotR: An R Package for Differential Item Functioning Analysis with Angoff's Delta Plot.",
+        "Journal of Statistical Software, Code Snippets, 59(1), 1-19.",
+        "URL http://www.jstatsoft.org/v59/c01/.")
 )
 

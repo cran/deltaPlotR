@@ -7,6 +7,23 @@
 
 
 ------------------------------------------
+- Changes in deltaPlotR 1.4 (2014-07-22) -
+------------------------------------------
+
+MINOR UPDATES
+
+  o  The 'deltaPlot' function was slightly modified to
+     improve the capturing of the output: the 'paste'
+     function to generate the file path was replaced
+     by 'file.path()'.
+
+  o  The references of the help files were updated.
+
+  o  Some typos were fixed.
+
+
+
+------------------------------------------
 - Changes in deltaPlotR 1.3 (2013-07-22) -
 ------------------------------------------
 
@@ -21,6 +38,7 @@ MINOR UPDATES
      implausible but this would lead to an error message. 
      Many thanks to an anonymous reviewer who pointed 
      out this issue.
+
   o  Some typos were fixed.
 
 
@@ -35,7 +53,9 @@ MINOR UPDATES
      'prop' or 'delta' value of the 'type' argument when
      the full item response matrix is provided to the
      'data' argument.
+
   o  Several references were updated.
+
   o  Some typos were fixed.
 
 
@@ -47,7 +67,9 @@ MINOR UPDATES
 MINOR UPDATES
 
   o  Some typos were corrected in the DESCRIPTION file.
+
   o  The CITATION file was updated to correct the package
      name, which was leading to an error when calling for
      citation within the R console.
+
   o  Several references were updated.

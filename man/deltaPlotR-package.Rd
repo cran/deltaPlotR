@@ -15,8 +15,8 @@
  \tabular{ll}{
   Package: \tab deltaPlotR \cr
   Type:    \tab Package \cr
-  Version: \tab 1.2 \cr
-  Date:    \tab 2013-07-08\cr
+  Version: \tab 1.4 \cr
+  Date:    \tab 2014-07-22\cr
   Depends: \tab R (>= 2.10.0), MASS \cr
   License: \tab GPL (>= 2) \cr
   }

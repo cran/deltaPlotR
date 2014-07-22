@@ -38,7 +38,7 @@ diagPlot(x, pch=2, pch.mult=17, axis.draw=TRUE, thr.draw=FALSE, dif.draw=c(1,3),
                                \code{"Reference group"} and \code{"Focal group"} respectively.}
  \item{save.plot}{logical: should the plot be saved in an external figure? (default is \code{FALSE}).}
  \item{save.options}{character: a vector of three components. The first component is the name of the output file, 
- the second component is either the file path or \code{"default"} (default), and the third component is the file 
+ the second component is either the file path (without final "/" symbol) or \code{"default"} (default), and the third component is the file 
  extension, either \code{"pdf"} (default) or \code{"jpeg"}. Ignored if \code{save.plot} is \code{FALSE}.}
 }
 
@@ -87,6 +87,8 @@ Magis, D., and Facon, B. (2012). Angoff's Delta method revisited: improving the 
 \emph{British Journal of Mathematical and Statistical Psychology, 65}, 302-321.
 
 Magis, D., and Facon, B. (2013). Item purification does not always improve DIF detection: a counter-example with Angoff's Delta plot. \emph{Educational and Psychological Measurement, 73}, 293-311.
+
+Magis, D. and Facon, B. (2014). \emph{deltaPlotR}: An R Package for Differential Item Functioning Analysis with Angoff's Delta Plot. \emph{Journal of Statistical Software, Code Snippets, 59(1)}, 1-19. URL \url{http://www.jstatsoft.org/v59/c01/}
 }
  
 

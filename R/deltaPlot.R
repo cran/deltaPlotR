@@ -186,11 +186,12 @@ stop("Perpendicular distances cannot be computed - one set of Delta scores is pr
         return(RES)
     }
     resToReturn <- internalDelta()
-    if (save.output == TRUE) {
+    if (save.output) {
         if (output[2] == "default") 
-            wd <- paste(getwd(), "/", sep = "")
+            wd <- file.path(getwd())
         else wd <- output[2]
-        fileName <- paste(wd, output[1], ".txt", sep = "")
+nameF<-paste(output[1],".txt",sep="")
+        fileName <- file.path(wd, nameF)
         capture.output(resToReturn, file = fileName)
     }
     return(resToReturn)
@@ -413,9 +414,10 @@ myBool<-ifelse(!res$purify,TRUE,ifelse(res$nrIter==1,TRUE,FALSE))
         cat("Output was not captured!", "\n")
     else {
         if (res$output[2] == "default") 
-            wd <- paste(getwd(), "/", sep = "")
+            wd <- file.path(getwd())
         else wd <- res$output[2]
-        fileName <- paste(wd, res$output[1], ".txt", sep = "")
+nameF<-paste(res$output[1], ".txt", sep = "")
+        fileName <- file.path(wd, nameF)
         cat("Output was captured and saved into file", "\n", 
             " '", fileName, "'", "\n", "\n", sep = "")
     }

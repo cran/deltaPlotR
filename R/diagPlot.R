@@ -51,10 +51,10 @@ legend(xl[1],yl[2],substitute(r[Delta] == x,list(x=round(rho,3))),bty="n")
                 "\n", "The plot was not captured!", "\n")
         else {
             if (save.options[2] == "default") 
-                wd <- paste(getwd(), "/", sep = "")
+                wd <- file.path(getwd())
             else wd <- save.options[2]
-            nameFile <- paste(wd, save.options[1], switch(plotype, 
-                `1` = ".pdf", `2` = ".jpg"), sep = "")
+nameF<-paste(save.options[1], switch(plotype, `1` = ".pdf", `2` = ".jpg"), sep = "")
+            nameFile <- file.path(wd,nameF)
             if (plotype == 1) {
                 {
                   pdf(file = nameFile)

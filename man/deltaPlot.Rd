@@ -189,7 +189,7 @@ steps of the process (successive perpendicular distances, parameters of the majo
 The output can be saved into na text file by specifying the argument \code{save.output} to \code{TRUE} (by default the 
 output is not captured). If so, the argument \code{output} can be specified as a vector of two character values. The first
 one gives the desired name of the text file, and the second one specifies the directory where the file will be saved (full
-path is required). By default, the output will be saved in the current working directory as "out.txt" file.
+path is required but without the final "/" symbol, see \bold{Examples} below). By default, the output will be saved in the current working directory as "out.txt" file.
 }
 
 \references{
@@ -200,6 +200,8 @@ Magis, D., and Facon, B. (2012). Angoff's Delta method revisited: improving the 
 \emph{British Journal of Mathematical and Statistical Psychology, 65}, 302-321.
 
 Magis, D., and Facon, B. (2013). Item purification does not always improve DIF detection: a counter-example with Angoff's Delta plot. \emph{Educational and Psychological Measurement, 73}, 293-311.
+
+Magis, D. and Facon, B. (2014). \emph{deltaPlotR}: An R Package for Differential Item Functioning Analysis with Angoff's Delta Plot. \emph{Journal of Statistical Software, Code Snippets, 59(1)}, 1-19. URL \url{http://www.jstatsoft.org/v59/c01/}
 }
  
 

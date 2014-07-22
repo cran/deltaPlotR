@@ -72,6 +72,8 @@ Jaynes, E.T. (2003). \emph{Probability theory: The logic of science}. Cambridge,
 
 Magis, D., and Facon, B. (2012). Angoff's Delta method revisited: improving the DIF detection under small samples.
 \emph{British Journal of Mathematical and Statistical Psychology, 65}, 302-321.
+
+Magis, D. and Facon, B. (2014). \emph{deltaPlotR}: An R Package for Differential Item Functioning Analysis with Angoff's Delta Plot. \emph{Journal of Statistical Software, Code Snippets, 59(1)}, 1-19. URL \url{http://www.jstatsoft.org/v59/c01/}
 }
  
 
@@ -124,4 +126,6 @@ Magis, D., and Facon, B. (2012). Angoff's Delta method revisited: improving the 
  # "constraint" method because of lack of provided data
  adjustExtreme(prop=prop)
 }
+
+
 
