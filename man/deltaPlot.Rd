@@ -12,73 +12,46 @@
 
 \usage{
 
-deltaPlot(data, type="response", group, focal.name, thr="norm", purify=FALSE, 
- purType="IPP1", maxIter=10, alpha=0.05,extreme="constraint", 
- const.range = c(0.001, 0.999), nrAdd = 1, save.output=FALSE,
- output=c("out","default"))
-\method{print}{deltaPlot}(x, only.final=TRUE, ...)
+deltaPlot(data, type = "response", group, focal.name, thr = "norm", 
+ purify = FALSE, purType = "IPP1", maxIter = 10, alpha =0.05, 
+ extreme = "constraint", const.range = c(0.001, 0.999), nrAdd = 1, 
+ save.output = FALSE,output = c("out", "default"))
+\method{print}{deltaPlot}(x, only.final = TRUE, ...)
 }
 
 \arguments{
- \item{data}{numeric: either (a) the data matrix with item responses and group membership, (b) the two-column matrix
-             of proportions of correct responses per item and per group, or (c) the two-column matrix of Delta scores.
-             See \bold{Details}.}
- \item{type}{character: the type of \code{data} argument. Possible values are \code{"response"} (default), \code{"prop"}
-             and \code{"delta"}. See \bold{Details}.}
- \item{group}{integer or character: a single value for locating the group membership column in the \code{data} argument.
-             Ignored if \code{type} is not \code{"response"}. See \bold{Details}.}
- \item{focal.name}{numeric or character: the value used in the group membership column to refer to the focal group.
-                   Ignored if \code{type} is not \code{"response"}. See \bold{Details}.}
- \item{thr}{numeric or character: the threshold for flagging items as DIF. Can be a positive numeric value or 
-            \code{"norm"}. See \bold{Details}.}
+ \item{data}{numeric: either (a) the data matrix with item responses and group membership, (b) the two-column matrix of proportions of correct responses per item and per group, or (c) the two-column matrix of Delta scores. See \bold{Details}.}
+ \item{type}{character: the type of \code{data} argument. Possible values are \code{"response"} (default), \code{"prop"} and \code{"delta"}. See \bold{Details}.}
+ \item{group}{integer or character: a single value for locating the group membership column in the \code{data} argument. Ignored if \code{type} is not \code{"response"}. See \bold{Details}.}
+ \item{focal.name}{numeric or character: the value used in the group membership column to refer to the focal group. Ignored if \code{type} is not \code{"response"}. See \bold{Details}.}
+ \item{thr}{numeric or character: the threshold for flagging items as DIF. Can be a positive numeric value or \code{"norm"}. See \bold{Details}.}
  \item{purify}{logical: should item purification be performed? (Default is code{FALSE}). See \bold{Details}.}
- \item{purType}{character: the type of purification process to be run. Possible values are \code{"IPP1"} (default),
-                \code{"IPP2"} and \code{"IPP3"}. Ignored if \code{purify} is \code{FALSE}. See \bold{Details}.}
- \item{maxIter}{integer: the maximum number of iteration in the purification process (default is 10). Ignored if
-                \code{purify} is \code{FALSE}.}
- \item{alpha}{numeric: the significance level for calculating the detection threshold (default is 0.05). Ignored if 
-              \code{thr} is numeric.}
- \item{extreme}{character: the method used to modify the extreme proportions. Possible values are \code{"constraint"}
-               (default) or \code{"add"}. See \bold{Details}.}
- \item{const.range}{numeric: a vector of two constraining proportions. Default values are 0.001 and 0.999. Ignored if
-                    \code{extreme} is \code{"add"}.}
- \item{nrAdd}{integer: the number of successes and the number of failures to add to the data in order to adjust the
-              proportions. Default value is 1. Ignored if \code{extreme} is \code{"constraint"}.}
+ \item{purType}{character: the type of purification process to be run. Possible values are \code{"IPP1"} (default), \code{"IPP2"} and \code{"IPP3"}. Ignored if \code{purify} is \code{FALSE}. See \bold{Details}.}
+ \item{maxIter}{integer: the maximum number of iteration in the purification process (default is 10). Ignored if \code{purify} is \code{FALSE}.}
+ \item{alpha}{numeric: the significance level for calculating the detection threshold (default is 0.05). Ignored if \code{thr} is numeric.}
+ \item{extreme}{character: the method used to modify the extreme proportions. Possible values are \code{"constraint"} (default) or \code{"add"}. See \bold{Details}.}
+ \item{const.range}{numeric: a vector of two constraining proportions. Default values are 0.001 and 0.999. Ignored if \code{extreme} is \code{"add"}.}
+ \item{nrAdd}{integer: the number of successes and the number of failures to add to the data in order to adjust the proportions. Default value is 1. Ignored if \code{extreme} is \code{"constraint"}.}
  \item{save.output}{logical: should the output be saved into a text file? (Default is \code{FALSE}).}
- \item{output}{character: a vector of two components. The first component is the name of the output file (\code{"out"}
-               by default), the second component is either the file path or \code{"default"} (default value). See 
-               \bold{Details}.}
+ \item{output}{character: a vector of two components. The first component is the name of the output file (\code{"out"} by default), the second component is either the file path or \code{"default"} (default value). See \bold{Details}.}
  \item{x}{an object of class \code{"deltaPlot"}, typically the output of the \code{deltaPlot} function.}
- \item{only.final}{logical: should only the first and last steps of the purification process be printed? (default is 
-                   \code{TRUE}. If \code{FALSE} all perpendicular distances, parameters of the major axis, and 
-                   detection thresholds are printed additionally. Ignored if \code{purify} is \code{FALSE}.}
+ \item{only.final}{logical: should only the first and last steps of the purification process be printed? (default is \code{TRUE}. If \code{FALSE} all perpendicular distances, parameters of the major axis, and detection thresholds are printed additionally. Ignored if \code{purify} is \code{FALSE}.}
  \item{...}{other generic parameters for the \code{plot} or the \code{print} functions.}
 }
 
 \value{
  A list of class \code{"deltaPlot"} with the following arguments:
   \item{Props}{the matrix of proportions of correct responses, or \code{NA} if \code{type} is \code{"delta"}.}
-  \item{adjProps}{the restricted proportions, in the same format as the output \code{Props} matrix, or \code{NA}
-                  if \code{type} is \code{"delta"}.}
+  \item{adjProps}{the restricted proportions, in the same format as the output \code{Props} matrix, or \code{NA} if \code{type} is \code{"delta"}.}
   \item{Deltas}{the matrix of Delta scores.}
-  \item{Dist}{a matrix with perpendicular distances, one row per item and one column per run of the Delta plot. If
-              \code{purify} is \code{FALSE}, only a single column is returned.}
-  \item{axis.par}{a matrix with two columns, holding respectively the intercepts and the slope parameters of the major
-                 axis. Each row refers to one step of the purification process. If \code{purify} is \code{FALSE},
-                 only a single row is returned.}
-  \item{nrIter}{the number of iterations invloved in the purification process. Returned only if \code{purify} is 
-                \code{TRUE}.}
+  \item{Dist}{a matrix with perpendicular distances, one row per item and one column per run of the Delta plot. If \code{purify} is \code{FALSE}, only a single column is returned.}
+  \item{axis.par}{a matrix with two columns, holding respectively the intercepts and the slope parameters of the major axis. Each row refers to one step of the purification process. If \code{purify} is \code{FALSE}, only a single row is returned.}
+  \item{nrIter}{the number of iterations invloved in the purification process. Returned only if \code{purify} is \code{TRUE}.}
   \item{maxIter}{the value of the \code{maxIter} argument. Returned only if \code{purify} is \code{TRUE}.}
-  \item{convergence}{a logical value indicating whether convergence was reached in the purification process. Returned 
-                     only if \code{purify} is \code{TRUE}.}
-  \item{difPur}{a matrix with one column per item and one row per iteration in the purification process, holding zeros
-                and ones to indicate which items were flagged as DIF or not at each step of the process. Returned only
-                if \code{purify} is \code{TRUE}.}
-  \item{thr}{a vector of successive threshold values used during the purification process. If \code{purify} is
-             \code{FALSE}, a single value is returned.}
-  \item{rule}{a character value indicating whether the threshold was \code{"fixed"} by the user (i.e. by setting 
-             \code{thr} to a numeric value) or whether it was computed by normal approximation (i.e. by setting
-             \code{thr} to \code{"norm"}).}
+  \item{convergence}{a logical value indicating whether convergence was reached in the purification process. Returned only if \code{purify} is \code{TRUE}.}
+  \item{difPur}{a matrix with one column per item and one row per iteration in the purification process, holding zeros and ones to indicate which items were flagged as DIF or not at each step of the process. Returned only if \code{purify} is \code{TRUE}.}
+  \item{thr}{a vector of successive threshold values used during the purification process. If \code{purify} is \code{FALSE}, a single value is returned.}
+  \item{rule}{a character value indicating whether the threshold was \code{"fixed"} by the user (i.e. by setting \code{thr} to a numeric value) or whether it was computed by normal approximation (i.e. by setting \code{thr} to \code{"norm"}).}
   \item{purType}{the value of the \code{purType} argument. Returned only if \code{purify} is \code{TRUE}.}
   \item{DIFitems}{either \code{"No DIF item detected"} or an integer vector with the items that were flagged as DIF.}
   \item{adjust.extreme}{the value of the \code{extreme} argument.}
@@ -91,12 +64,9 @@ deltaPlot(data, type="response", group, focal.name, thr="norm", purify=FALSE,
 }
 
 \details{
-Angoff's Delta plot (Angoff and Ford, 1973) is a straightforward test-score method to detect DIF among dichotomously 
-scored items. Proportions of correct responses are computed first per item and per group of respondents, and are 
-successively transformed onto \emph{z}-scores and then onto \eqn{\Delta} scores. The pairs of \eqn{\Delta} scores can
+Angoff's Delta plot (Angoff and Ford, 1973) is a straightforward test-score method to detect DIF among dichotomously scored items. Proportions of correct responses are computed first per item and per group of respondents, and are successively transformed onto \emph{z}-scores and then onto \eqn{\Delta} scores. The pairs of \eqn{\Delta} scores can
 be displayed onto a scatter plot, called the \emph{Delta plot}, and the majr axis of the ellipsoid of Delta points is
-derived. Eventually, items whose perpendicular distance (from the major axis) is too large are flagged as DIF. See 
-Angoff and Ford (1973) for further details.
+derived. Eventually, items whose perpendicular distance (from the major axis) is too large are flagged as DIF. See Angoff and Ford (1973) for further details.
 
 The data must be passed through the argument \code{data} and can be of three types. Each type is defined by the 
 \code{type} argument and can take three values: \code{"response"}, \code{"prop"} and \code{"delta"}.
@@ -104,12 +74,10 @@ The data must be passed through the argument \code{data} and can be of three typ
 \item If \code{type} is \code{"response"}, the input \code{data} consist in a matrix with one row per respondent and
 \eqn{J+1} columns, where \eqn{J} is the number of items. In the colmuns coding for the items, only possible entries are 0
 (for incorrect responses), 1 (for corect responses) and \code{NA} (for missing values). The extra column is used to
-define group membership: all respondents of the reference group take the same value (either numeric or character), and all
-respondents in the focal group take the same (numeric or character) value but different from the reference group. Note 
+define group membership: all respondents of the reference group take the same value (either numeric or character), and all respondents in the focal group take the same (numeric or character) value but different from the reference group. Note 
 that the group membership column can be located anywhere in the data set (not especially in first or last position).
 \item If \code{type} is \code{"prop"}, the input \code{data} consist in a two-column matrix with one row per item. Each
-row contains the proportions of correct responses, respectively in the reference group (first column) and in the focal
-group (second column). 
+row contains the proportions of correct responses, respectively in the reference group (first column) and in the focal group (second column). 
 \item If \code{type} is \code{"delta"}, the input \code{data} consist in a two-column matrix that is similar to that
 provided with the \code{"prop"} type of input, but with the Delta scores provided instead of the proportions of correct
 responses.
@@ -123,9 +91,7 @@ argument \code{focal.name} the value that was used in the group membership colum
 
 If the input \code{type} is not \code{"delta"}, then extreme proportions of correct responses (either provided when 
 \code{type} is \code{"prop"} or computed from the data if \code{type} is \code{"response"}) are adjusted by specifying
-the arguments \code{extreme}, \code{const.range} and \code{nrAdd} with appropriate values. See the 
-\code{\link{adjustExtreme}} function for further details (note that the cuyrrent \code{extreme} argument corresponds to
-the \code{method} argument in this function).
+the arguments \code{extreme}, \code{const.range} and \code{nrAdd} with appropriate values. See the \code{\link{adjustExtreme}} function for further details (note that the cuyrrent \code{extreme} argument corresponds to the \code{method} argument in this function).
 
 The threshold for flaging items as DIF can be of two types and is specified by the \code{thr} argument.
 \enumerate{
@@ -134,8 +100,7 @@ case, \code{thr} takes the required numeric threshold value.
 \item Alternatively, it can be derived from the bivariate normal approximation of the Delta points (Magis and Facon, 2012). In this case, \code{thr} must be given the character value \code{"norm"} (which is the default value).
 This threshold equals
 \deqn{\Phi^{-1}(1-\alpha/2) \; \sqrt{\frac{b^2\,{s_0}^2-2\,b\,s_{01}+{s_1}^2}{b^2+1}}}
-where \eqn{\Phi} is the density of the standard normal distribution, \eqn{\alpha} is the significance level (set by the
-argument \code{alpha} with default value 0.05), \eqn{b} is the slope parameter of the major axis, \eqn{s_0} and \eqn{s_1}
+where \eqn{\Phi} is the density of the standard normal distribution, \eqn{\alpha} is the significance level (set by the argument \code{alpha} with default value 0.05), \eqn{b} is the slope parameter of the major axis, \eqn{s_0} and \eqn{s_1}
 are the sample standard deviations of the Delta scores in the reference group and the focal group, respecively, and
 \eqn{s_{01}} is the sample covariance of the Delta scores (see Magis and Facon, 2012, for further details).
 }
@@ -155,13 +120,11 @@ back to step 1.
 }
 
 Unlike traditional DIF methods, the detection threshold may also be updated since it depends on the sample estimates (when 
-the normal approximation is considered). Three approaches are currently implemented and are specified by the 
-\code{purType} argument.
+the normal approximation is considered). Three approaches are currently implemented and are specified by the \code{purType} argument.
 \enumerate{
 \item Method 1 (\code{purType=="IPP1"}): the same threshold is used throughout the purification process, it is not
 iteratively updated. The threshold is the one obtained after the first run of the Delta plot.
-\item Method 2 (\code{purType=="IPP2"}): only the slope parameter is updated in the threshold formula. By this way, one
-keeps the full data structure (i.e. neither the sample variances nor the sample covariance of the Delta scores are 
+\item Method 2 (\code{purType=="IPP2"}): only the slope parameter is updated in the threshold formula. By this way, one keeps the full data structure (i.e. neither the sample variances nor the sample covariance of the Delta scores are 
 modified) but only the slope parameter is adjusted to lessen the impact of DIF items.
 \item Method 3 (\code{purType=="IPP3"}): all adjusted parameters are plugged in the threshold formula. This approach
 completely discards the effect of items flagged as DIF from the computation of the threshold.
@@ -183,8 +146,7 @@ purification process. Moreover, perpendicular distances are returned in a matrix
 well as successive major axis parameters (one row per iteration) and successive thresholds (as a vector).
 
 The output is managed and printed in a more user-friendly way. When item purification is performed, only the first and
-last steps are displayed. Specifying the argument \code{only.final} to \code{FALSE} prints in addition all intermediate 
-steps of the process (successive perpendicular distances, parameters of the major axis, and detection thresholds).
+last steps are displayed. Specifying the argument \code{only.final} to \code{FALSE} prints in addition all intermediate steps of the process (successive perpendicular distances, parameters of the major axis, and detection thresholds).
 
 The output can be saved into na text file by specifying the argument \code{save.output} to \code{TRUE} (by default the 
 output is not captured). If so, the argument \code{output} can be specified as a vector of two character values. The first

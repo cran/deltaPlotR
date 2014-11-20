@@ -1,4 +1,4 @@
-diagPlot<-function(x,pch=2,pch.mult=17,axis.draw=TRUE,thr.draw=FALSE,dif.draw=c(1,3),print.corr=FALSE,xlim=NULL,ylim=NULL,xlab=NULL,ylab=NULL,save.plot=FALSE,save.options=c("plot","default","pdf")){
+diagPlot<-function(x,pch=2,pch.mult=17,axis.draw=TRUE,thr.draw=FALSE,dif.draw=c(1,3),print.corr=FALSE,xlim=NULL,ylim=NULL,xlab=NULL,ylab=NULL,main=NULL,save.plot=FALSE,save.options=c("plot","default","pdf")){
 internalDP<-function(){
 ra<-range(x$Deltas)
 rm<-ifelse(round(ra[1])<=0,0,round(ra[1])-1)
@@ -11,7 +11,7 @@ if (is.null(xlab)) xla<-"Reference group"
 else xla<-xlab
 if (is.null(ylab)) yla<-"Focal group"
 else yla<-ylab
-plot(x$Deltas[,1],x$Deltas[,2],pch=pch,xlim=xl,ylim=yl,xlab=xla,ylab=yla)
+plot(x$Deltas[,1],x$Deltas[,2],pch=pch,xlim=xl,ylim=yl,xlab=xla,ylab=yla,main=main)
 if (axis.draw){
 if (is.null(dim(x$axis.par))) pars<-x$axis.par
 else pars<-x$axis.par[nrow(x$axis.par),]

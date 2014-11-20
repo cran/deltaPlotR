@@ -6,8 +6,7 @@
 
 
 \description{
- The deltaPlotR package proposes an implementation of Angoff's   Delta Plot method to detect dichotomous DIF. Several detection thresholds are included, either from multivariate
- normality asumption, random simulation, or by prior determination. Item purification is supported.
+ The deltaPlotR package proposes an implementation of Angoff's   Delta Plot method to detect dichotomous DIF. Several detection thresholds are included, either from multivariate normality asumption, random simulation, or by prior determination. Item purification is supported.
 
  }
 
@@ -15,8 +14,8 @@
  \tabular{ll}{
   Package: \tab deltaPlotR \cr
   Type:    \tab Package \cr
-  Version: \tab 1.4 \cr
-  Date:    \tab 2014-07-22\cr
+  Version: \tab 1.5 \cr
+  Date:    \tab 2014-11-20\cr
   Depends: \tab R (>= 2.10.0), MASS \cr
   License: \tab GPL (>= 2) \cr
   }

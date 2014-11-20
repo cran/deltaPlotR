@@ -1,8 +1,21 @@
-        *******************************************************
-        *                                                     *
-        *  Changes and Developments in the deltaPlot Package  *
-        *                                                     *
-        *******************************************************
+                **************************************************
+*                                                *
+*  Changes and Developments in the catR Package  *
+*                                                *
+**************************************************
+
+
+------------------------------------------
+- Changes in deltaPlotR 1.5 (2014-11-20) -
+------------------------------------------
+
+MINOR UPDATES
+
+  o  The 'diagPlot' function was improved by adding
+     the 'main' argument to allow for including a 
+     main title to the diagonal plot.
+
+  o  Some typos were fixed.
 
 
 

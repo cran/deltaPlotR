@@ -9,9 +9,10 @@
 }
 
 \usage{
-diagPlot(x, pch=2, pch.mult=17, axis.draw=TRUE, thr.draw=FALSE, dif.draw=c(1,3), 
- print.corr=FALSE, xlim=NULL, ylim=NULL, xlab=NULL, ylab=NULL,
- save.plot=FALSE, save.options=c("plot","default","pdf"))
+diagPlot(x, pch = 2, pch.mult = 17, axis.draw = TRUE, thr.draw = FALSE, 
+ dif.draw = c(1,3), print.corr = FALSE, xlim = NULL, ylim = NULL, xlab = NULL, 
+ ylab = NULL,main = NULL, save.plot = FALSE, 
+ save.options = c("plot", "default", "pdf"))
 }
 
 \arguments{
@@ -32,34 +33,26 @@ diagPlot(x, pch=2, pch.mult=17, axis.draw=TRUE, thr.draw=FALSE, dif.draw=c(1,3),
                  flagged as DIF.}
  \item{print.corr}{Logical: should the sample correlation of Delta scores be printed? (default is \code{FALSE}). If
                    \code{TRUE}, it is printed in upper-left corner of the plot.}
- \item{xlim, ylim, xlab, ylab}{either the usual plot arguments \code{xlim}, \code{ylim}, \code{xlab} and \code{ylab},
-                               or \code{NULL} (default value for all arguments). If \code{NULL}, the X and Y axis limits
-                               are computed from the range of Delta scores, and the X and Y axis labels are 
-                               \code{"Reference group"} and \code{"Focal group"} respectively.}
+ \item{xlim, ylim, xlab, ylab, main}{either the usual plot arguments \code{xlim}, \code{ylim}, \code{xlab}, \code{ylab} and \code{main}, or \code{NULL} (default value for all arguments). If \code{NULL}, the X and Y axis limits are computed from the range of Delta scores, the X and Y axis labels are \code{"Reference group"} and \code{"Focal group"} respectively, and no main title is produced.}
  \item{save.plot}{logical: should the plot be saved in an external figure? (default is \code{FALSE}).}
  \item{save.options}{character: a vector of three components. The first component is the name of the output file, 
- the second component is either the file path (without final "/" symbol) or \code{"default"} (default), and the third component is the file 
- extension, either \code{"pdf"} (default) or \code{"jpeg"}. Ignored if \code{save.plot} is \code{FALSE}.}
+ the second component is either the file path (without final "/" symbol) or \code{"default"} (default), and the third component is the file extension, either \code{"pdf"} (default) or \code{"jpeg"}. Ignored if \code{save.plot} is \code{FALSE}.}
 }
 
 
 \details{
-The results of the Delta plot method can be graphically displayed using this function. Basqically the Delta plot displays
-the items in a scatter plot by means of their Delta points, and the major axis is drawn. Several options permit to
+The results of the Delta plot method can be graphically displayed using this function. Basically the Delta plot displays the items in a scatter plot by means of their Delta points, and the major axis is drawn. Several options permit to
 enhance this basic plot.
 
-The input data \code{x} must be a list of class \code{deltaPlot}, so typically the output of the \code{\link{deltaPlot}}
-function. All other argumpents are rather standard and for optimization of the graphical display.
+The input data \code{x} must be a list of class \code{deltaPlot}, so typically the output of the \code{\link{deltaPlot}} function. All other argumpents are rather standard and for optimization of the graphical display.
 
 The type of point is defined by the \code{cex} argument. It takes the default value 2, which means that items are 
 displayed with empty triangles. If several items are located on exactly the same Delta point, the \code{pch.mult} 
 argument defines the type of point to display bover the existing point. The default value is 17, that is, a full black
 triangle. In this way, multiple items located at a single Delta point can easily be located on the plot.
 
-The types of axes can be dran: the major axis and the upper and lower bounds for DIF detection. The major axis is drawn by
-default, while the upper and lower boun ds are not. The major axis can be withdrawn by setting the argument 
-\code{axis.draw} to \code{FALSE}, and the bounds can be displayed by setting the argument \code{thr.draw} to \code{TRUE}.
-The major axis is always drawn by a solid line, the bounds by dashed lines.
+Two types of axes can be draw: the major axis and the upper and lower bounds for DIF detection. The major axis is drawn by
+default, while the upper and lower bounds are not. The major axis can be withdrawn by setting the argument \code{axis.draw} to \code{FALSE}, and the bounds can be displayed by setting the argument \code{thr.draw} to \code{TRUE}. The major axis is always drawn by a solid line, the bounds by dashed lines.
 
 Items flagged as DIF are also clearly identified on the plot. The argument \code{dif.draw} defines both the type of point
 and the size of the point to draw over the existing Delta points (for items flagged as DIF only). The defaulkt value is
@@ -68,9 +61,7 @@ and the size of the point to draw over the existing Delta points (for items flag
 The sample correlation between the Delta scores can also be printed, in the upper-left corner of the plot. To do this, 
 the argument \code{print.corr} must be set to  \code{TRUE}.
 
-Finally, the function will automatically determines the X and Y axis limits and specifies default labels for X and Y axes.
-These can obviously be specified by the user, using the usual \code{xlim}, \code{ylim}, \code{xlab} and \code{ylab}
-arguments.
+Finally, the function will automatically determines the X and Y axis limits and specifies default labels for X and Y axes and the main title. These can also be specified by the user, using the usual \code{xlim}, \code{ylim}, \code{xlab}, \code{ylab} and \code{main} arguments.
 
 The plot can be saved in an external file, either as PDF or JPEG format. First, the argument \code{save.plot} must be set
 to \code{TRUE} (default is \code{FALSE}). Then, the name of the figure, its location and format are specified through 

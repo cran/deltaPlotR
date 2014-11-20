@@ -9,27 +9,19 @@
 }
 
 \usage{
-adjustExtreme(data=NULL, group=NULL, focal.name=NULL, prop, method="constraint",
- const.range=c(0.001,0.999), nrAdd=1)
+adjustExtreme(data = NULL, group = NULL, focal.name = NULL, prop, 
+ method = "constraint", const.range = c(0.001, 0.999), nrAdd = 1)
 }
 
 \arguments{
- \item{data}{numeric: the data matrix: one row per subject, one column per item, with possible entries 0, 1 or NA. Default
-             value is \code{NULL}.}
- \item{group}{numeric or character: a vector of the same length as \code{nrow(data)} with two different values, one
-              for the reference group, one for the focal group. Values can be either numeric or character. Default value
-              is \code{NULL}.}
+ \item{data}{numeric: the data matrix: one row per subject, one column per item, with possible entries 0, 1 or NA. Default value is \code{NULL}.}
+ \item{group}{numeric or character: a vector of the same length as \code{nrow(data)} with two different values, one for the reference group, one for the focal group. Values can be either numeric or character. Default value is \code{NULL}.}
  \item{focal.name}{numeric or character: the value used in the \code{group} vector to refer to the focal group. Default
                    value is \code{NULL}.}
- \item{prop}{numeric: a matrix with one row per item and two columns. The first column holds the percentage of correct
-             responses for each item in the reference group, and the second column holds the same percentages but for
-             the focal group.}
- \item{method}{character: the method used to modify the extreme proportions. Possible values are \code{"constraint"}
-               (default) or \code{"add"}. See \bold{Details}.}
- \item{const.range}{numeric: a vector of two constraining proportions. Default values are 0.001 and 0.999. Ignored if
-                    \code{method} is \code{"add"}.}
- \item{nrAdd}{integer: the number of successes and the number of failures to add to the data in order to adjust the
-              proportions. Default value is 1. Ignored if \code{method} is \code{"constraint"}.}
+ \item{prop}{numeric: a matrix with one row per item and two columns. The first column holds the percentage of correct responses for each item in the reference group, and the second column holds the same percentages but for the focal group.}
+ \item{method}{character: the method used to modify the extreme proportions. Possible values are \code{"constraint"} (default) or \code{"add"}. See \bold{Details}.}
+ \item{const.range}{numeric: a vector of two constraining proportions. Default values are 0.001 and 0.999. Ignored if \code{method} is \code{"add"}.}
+ \item{nrAdd}{integer: the number of successes and the number of failures to add to the data in order to adjust the proportions. Default value is 1. Ignored if \code{method} is \code{"constraint"}.}
 }
 
 \value{
@@ -41,21 +33,15 @@ adjustExtreme(data=NULL, group=NULL, focal.name=NULL, prop, method="constraint",
  }
 
 \details{
-The Delta plot method requires the computation of the proportions o correct responses per item and per group. However,
-these proportions must be stricly greater than zero and smaller than one, since they are transformed onto \emph{z}-scores.
-Thus, extreme proportions must be adjusted for proper use of the Delta plot. 
+The Delta plot method requires the computation of the proportions o correct responses per item and per group. However, these proportions must be stricly greater than zero and smaller than one, since they are transformed onto \emph{z}-scores. Thus, extreme proportions must be adjusted for proper use of the Delta plot. 
 
 Two approaches are currently implemented and set to \code{adjustExtreme} by the \code{method} argument.
 
-The first method is the \emph{constraint} method and is set by \code{method="constraint"}. It simply consists in 
-constraining the proportions within a specified range of values in (0,1). This restricted range of values is set by the 
-\code{const.range} argument and takes the default value \code{c(0.001,0.999)}.
+The first method is the \emph{constraint} method and is set by \code{method="constraint"}. It simply consists in constraining the proportions within a specified range of values in (0,1). This restricted range of values is set by the \code{const.range} argument and takes the default value \code{c(0.001, 0.999)}.
 
 The second method is the so-called \emph{add} method and is specified by \code{method="add"}. It consists in rabitrarily
 adding some successes and the same number of failures to the data, in order to get a modified proportion of successes. 
-This number of extra successes is set by the \emph{nrAdd} argument, with default value one. In sum, by default one success 
-one failure is added to the item responses, so that the newly computed proportion of successes is not extreme anymore, 
-yet close to the original value. This default values refers to the so-called Laplace rule (see e.g. Jaynes, 2003). 
+This number of extra successes is set by the \emph{nrAdd} argument, with default value one. In sum, by default one success one failure is added to the item responses, so that the newly computed proportion of successes is not extreme anymore, yet close to the original value. This default values refers to the so-called Laplace rule (see e.g. Jaynes, 2003). 
 
 The input arguments are: the data matrix of item responses (ith possible entries 0, 1 and \code{NA} for missing data), 
 the vector of group memebership and the numeric (or character) value coding for the focal group. By default they take the
