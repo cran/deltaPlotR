@@ -5,6 +5,12 @@
 exportPattern(".")
 
 # Import all packages listed as Imports or Depends
-import(
-  MASS
-)
+import(MASS)
+
+
+importFrom("grDevices", "dev.off", "jpeg", "pdf")
+importFrom("graphics", "abline", "legend", "plot", "points")
+importFrom("stats", "cor", "cov", "qnorm", "symnum")
+importFrom("utils", "capture.output")
+
+S3method("print","deltaPlot")

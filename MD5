@@ -1,6 +1,6 @@
-ebd1bf56d073c09e2fb3c45828a6b1e9 *DESCRIPTION
-87e8c2a1f3f1d5b29ebd4c49aa9c2962 *NAMESPACE
-f0e9a9f7fb2ff19b7a836224992f4ccc *NEWS
+48016bbcacd6d984ad1287a67db088a2 *DESCRIPTION
+b0a46cc411cd7cc7ae9b82879307aac3 *NAMESPACE
+316f20248ac9cebaa2dd648aa4825161 *NEWS
 d35c86e42a5001dbe212c9bc48bb31bc *R/adjustExtreme.R
 e64b2ae922291c84c96028753a67322a *R/deltaPlot.R
 600ccc7ec9a6c59202da7fdfd8cfd60a *R/diagPlot.R
@@ -8,6 +8,5 @@ b661b5d7d3a057ab822193c0f1439a7d *data/verbal.txt.gz
 c080e455790b5a69bf11b5d168e1bbd8 *inst/CITATION
 49ff370fb5e1e1a2f14611ef7b99ffab *man/adjustExtreme.Rd
 26c2b0b4acb4d7a57727c379fda9f53a *man/deltaPlot.Rd
-b5391b8ca4b600e49c3e0aba95c56c58 *man/deltaPlotR-package.Rd
 723feda7331e30b50d638baac755480b *man/diagPlot.Rd
 c4eec7b8c942c0bd74ac8b3704bf19c8 *man/verbal.rd

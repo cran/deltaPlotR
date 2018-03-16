@@ -6,6 +6,19 @@
 
 
 ------------------------------------------
+- Changes in deltaPlotR 1.6 (2018-03-19) -
+------------------------------------------
+
+MINOR UPDATES
+
+  o  The 'NAMESPACES' file was updated to get S3
+     methods registered.
+
+  o  Some typos were fixed.
+
+
+
+------------------------------------------
 - Changes in deltaPlotR 1.5 (2014-11-20) -
 ------------------------------------------
 
