@@ -4,20 +4,20 @@
 \title{Plot of the Deltas points from the Delta Plot method}
 
 \description{
- This command plots the output of the \code{\link{deltaPlot}} function as a diagonal plot of Deltas points. Several 
+ This command plots the output of the \code{\link{deltaPlot}} function as a diagonal plot of Deltas points. Several
  graphical options are available.
 }
 
 \usage{
-diagPlot(x, pch = 2, pch.mult = 17, axis.draw = TRUE, thr.draw = FALSE, 
- dif.draw = c(1,3), print.corr = FALSE, xlim = NULL, ylim = NULL, xlab = NULL, 
- ylab = NULL,main = NULL, save.plot = FALSE, 
+diagPlot(x, pch = 2, pch.mult = 17, axis.draw = TRUE, thr.draw = FALSE,
+ dif.draw = c(1,3), print.corr = FALSE, xlim = NULL, ylim = NULL, xlab = NULL,
+ ylab = NULL,main = NULL, save.plot = FALSE,
  save.options = c("plot", "default", "pdf"))
 }
 
 \arguments{
  \item{x}{an object of class \code{"deltaPlot"}, typically the output of the \code{\link{deltaPlot}} function.}
- \item{pch}{integer: the usual point character type for point display. Default value is 2, that is, Delta points are 
+ \item{pch}{integer: the usual point character type for point display. Default value is 2, that is, Delta points are
             drawn as empty triangles.}
  \item{pch.mult}{integer: the typoe of point to be used for superposing onto Delta points that correspond to several
                  items. Default value is 17, that is, full black traingles are drawn onto existing Delta plots wherein
@@ -26,7 +26,7 @@ diagPlot(x, pch = 2, pch.mult = 17, axis.draw = TRUE, thr.draw = FALSE,
                   line.}
  \item{thr.draw}{logical: should the upper and lower bounds for DIF detection be drawn? (default is \code{FALSE}). If
                  \code{TRUE}, they will be drawn as dashed lines.}
- \item{dif.draw}{numeric: a vector of two integer values to specify how the DIF items should be displayed. The first 
+ \item{dif.draw}{numeric: a vector of two integer values to specify how the DIF items should be displayed. The first
                  component of \code{dif.draw} is the type of point (i.e. the usual \code{pch} argument) and the second
                  component determlines the point size (i.e. the usual \code{cex} argument). Default values are 1 and 3,
                  meaning that empty circles of three time the usual size are drawn around the Delta points of items
@@ -35,7 +35,7 @@ diagPlot(x, pch = 2, pch.mult = 17, axis.draw = TRUE, thr.draw = FALSE,
                    \code{TRUE}, it is printed in upper-left corner of the plot.}
  \item{xlim, ylim, xlab, ylab, main}{either the usual plot arguments \code{xlim}, \code{ylim}, \code{xlab}, \code{ylab} and \code{main}, or \code{NULL} (default value for all arguments). If \code{NULL}, the X and Y axis limits are computed from the range of Delta scores, the X and Y axis labels are \code{"Reference group"} and \code{"Focal group"} respectively, and no main title is produced.}
  \item{save.plot}{logical: should the plot be saved in an external figure? (default is \code{FALSE}).}
- \item{save.options}{character: a vector of three components. The first component is the name of the output file, 
+ \item{save.options}{character: a vector of three components. The first component is the name of the output file,
  the second component is either the file path (without final "/" symbol) or \code{"default"} (default), and the third component is the file extension, either \code{"pdf"} (default) or \code{"jpeg"}. Ignored if \code{save.plot} is \code{FALSE}.}
 }
 
@@ -46,8 +46,8 @@ enhance this basic plot.
 
 The input data \code{x} must be a list of class \code{deltaPlot}, so typically the output of the \code{\link{deltaPlot}} function. All other argumpents are rather standard and for optimization of the graphical display.
 
-The type of point is defined by the \code{cex} argument. It takes the default value 2, which means that items are 
-displayed with empty triangles. If several items are located on exactly the same Delta point, the \code{pch.mult} 
+The type of point is defined by the \code{cex} argument. It takes the default value 2, which means that items are
+displayed with empty triangles. If several items are located on exactly the same Delta point, the \code{pch.mult}
 argument defines the type of point to display bover the existing point. The default value is 17, that is, a full black
 triangle. In this way, multiple items located at a single Delta point can easily be located on the plot.
 
@@ -56,17 +56,17 @@ default, while the upper and lower bounds are not. The major axis can be withdra
 
 Items flagged as DIF are also clearly identified on the plot. The argument \code{dif.draw} defines both the type of point
 and the size of the point to draw over the existing Delta points (for items flagged as DIF only). The defaulkt value is
-\code{c(1,3)}, meaning that empty circles three times larger than usual are drawn. 
+\code{c(1,3)}, meaning that empty circles three times larger than usual are drawn.
 
-The sample correlation between the Delta scores can also be printed, in the upper-left corner of the plot. To do this, 
+The sample correlation between the Delta scores can also be printed, in the upper-left corner of the plot. To do this,
 the argument \code{print.corr} must be set to  \code{TRUE}.
 
 Finally, the function will automatically determines the X and Y axis limits and specifies default labels for X and Y axes and the main title. These can also be specified by the user, using the usual \code{xlim}, \code{ylim}, \code{xlab}, \code{ylab} and \code{main} arguments.
 
 The plot can be saved in an external file, either as PDF or JPEG format. First, the argument \code{save.plot} must be set
-to \code{TRUE} (default is \code{FALSE}). Then, the name of the figure, its location and format are specified through 
-the argument \code{save.options}, all as character strings. See the \bold{Examples} section for further information and a 
-practical example. 
+to \code{TRUE} (default is \code{FALSE}). Then, the name of the figure, its location and format are specified through
+the argument \code{save.options}, all as character strings. See the \bold{Examples} section for further information and a
+practical example.
 }
 
 
@@ -79,9 +79,9 @@ Magis, D., and Facon, B. (2012). Angoff's Delta method revisited: improving the 
 
 Magis, D., and Facon, B. (2013). Item purification does not always improve DIF detection: a counter-example with Angoff's Delta plot. \emph{Educational and Psychological Measurement, 73}, 293-311.
 
-Magis, D. and Facon, B. (2014). \emph{deltaPlotR}: An R Package for Differential Item Functioning Analysis with Angoff's Delta Plot. \emph{Journal of Statistical Software, Code Snippets, 59(1)}, 1-19. URL \url{http://www.jstatsoft.org/v59/c01/}
+Magis, D. and Facon, B. (2014). \emph{deltaPlotR}: An R Package for Differential Item Functioning Analysis with Angoff's Delta Plot. \emph{Journal of Statistical Software, Code Snippets, 59(1)}, 1-19. URL \url{https://www.jstatsoft.org/v59/c01/}
 }
- 
+
 
 \seealso{
 \code{\link{deltaPlot}}
@@ -91,11 +91,11 @@ Magis, D. and Facon, B. (2014). \emph{deltaPlotR}: An R Package for Differential
     David Magis \cr
     Post-doc Fellow of the National Funds for Scientific Research (FNRS, Belgium) \cr
     University of Liege \cr
-    \email{David.Magis@ulg.ac.be}, \url{http://ppw.kuleuven.be/okp/home/} \cr
+    \email{David.Magis@ulg.ac.be}, \url{https://ppw.kuleuven.be/okp/home/} \cr
     Bruno Facon\cr
     Professor, Department of Psychology \cr
     Universite Lille-Nord de France\cr
-    \email{bruno.facon@univ-lille3.fr}, \cr 
+    \email{bruno.facon@univ-lille3.fr}, \cr
     }
 
 \examples{
@@ -108,7 +108,7 @@ Magis, D. and Facon, B. (2014). \emph{deltaPlotR}: An R Package for Differential
  verbal <- verbal[colnames(verbal)!="Anger"]
 
  # Basic Delta plot, threshold 1.5, no item purification
- res <- deltaPlot(data=verbal, type="response", group=25, focal.name=1, purify=FALSE, 
+ res <- deltaPlot(data=verbal, type="response", group=25, focal.name=1, purify=FALSE,
                   thr=1.5)
 
  # Keeping the first 10 items to exhibit DIF
@@ -117,8 +117,8 @@ Magis, D. and Facon, B. (2014). \emph{deltaPlotR}: An R Package for Differential
   thr="norm")
  res0 # Item 8 is flagged as DIF
 
- res1 <- deltaPlot(data=data, type="response", group=11, focal.name=1, purify=TRUE, 
-           thr="norm", purType="IPP3") 
+ res1 <- deltaPlot(data=data, type="response", group=11, focal.name=1, purify=TRUE,
+           thr="norm", purType="IPP3")
  res1 # Items 6, 7 and 8 flagged as DIF after 4 iterations
 
  # Delta plot, default options
@@ -138,10 +138,11 @@ Magis, D. and Facon, B. (2014). \emph{deltaPlotR}: An R Package for Differential
  diagPlot(res, xlim=c(9,20), ylim=c(9,20), print.corr=TRUE)
  diagPlot(res1, xlim=c(9,17), print.corr=TRUE)
 
+ \dontrun{
  # Saving the plots as PDF and JPEG files, default folder, specific names
  diagPlot(res, save.plot=TRUE, save.options=c("res","default","pdf"))
  diagPlot(res1, save.plot=TRUE, save.options=c("res1","default","jpeg"))
-
+ }
  # Modifying the results to make two items be located on the same place
  res2<-res1
  res2$Deltas[9,]<-res2$Deltas[3,]

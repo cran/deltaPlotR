@@ -12,9 +12,9 @@
 
 \usage{
 
-deltaPlot(data, type = "response", group, focal.name, thr = "norm", 
- purify = FALSE, purType = "IPP1", maxIter = 10, alpha =0.05, 
- extreme = "constraint", const.range = c(0.001, 0.999), nrAdd = 1, 
+deltaPlot(data, type = "response", group, focal.name, thr = "norm",
+ purify = FALSE, purType = "IPP1", maxIter = 10, alpha =0.05,
+ extreme = "constraint", const.range = c(0.001, 0.999), nrAdd = 1,
  save.output = FALSE,output = c("out", "default"))
 \method{print}{deltaPlot}(x, only.final = TRUE, ...)
 }
@@ -25,7 +25,7 @@ deltaPlot(data, type = "response", group, focal.name, thr = "norm",
  \item{group}{integer or character: a single value for locating the group membership column in the \code{data} argument. Ignored if \code{type} is not \code{"response"}. See \bold{Details}.}
  \item{focal.name}{numeric or character: the value used in the group membership column to refer to the focal group. Ignored if \code{type} is not \code{"response"}. See \bold{Details}.}
  \item{thr}{numeric or character: the threshold for flagging items as DIF. Can be a positive numeric value or \code{"norm"}. See \bold{Details}.}
- \item{purify}{logical: should item purification be performed? (Default is code{FALSE}). See \bold{Details}.}
+ \item{purify}{logical: should item purification be performed? (Default is \code{FALSE}). See \bold{Details}.}
  \item{purType}{character: the type of purification process to be run. Possible values are \code{"IPP1"} (default), \code{"IPP2"} and \code{"IPP3"}. Ignored if \code{purify} is \code{FALSE}. See \bold{Details}.}
  \item{maxIter}{integer: the maximum number of iteration in the purification process (default is 10). Ignored if \code{purify} is \code{FALSE}.}
  \item{alpha}{numeric: the significance level for calculating the detection threshold (default is 0.05). Ignored if \code{thr} is numeric.}
@@ -68,16 +68,16 @@ Angoff's Delta plot (Angoff and Ford, 1973) is a straightforward test-score meth
 be displayed onto a scatter plot, called the \emph{Delta plot}, and the majr axis of the ellipsoid of Delta points is
 derived. Eventually, items whose perpendicular distance (from the major axis) is too large are flagged as DIF. See Angoff and Ford (1973) for further details.
 
-The data must be passed through the argument \code{data} and can be of three types. Each type is defined by the 
+The data must be passed through the argument \code{data} and can be of three types. Each type is defined by the
 \code{type} argument and can take three values: \code{"response"}, \code{"prop"} and \code{"delta"}.
 \itemize{
 \item If \code{type} is \code{"response"}, the input \code{data} consist in a matrix with one row per respondent and
 \eqn{J+1} columns, where \eqn{J} is the number of items. In the colmuns coding for the items, only possible entries are 0
 (for incorrect responses), 1 (for corect responses) and \code{NA} (for missing values). The extra column is used to
-define group membership: all respondents of the reference group take the same value (either numeric or character), and all respondents in the focal group take the same (numeric or character) value but different from the reference group. Note 
+define group membership: all respondents of the reference group take the same value (either numeric or character), and all respondents in the focal group take the same (numeric or character) value but different from the reference group. Note
 that the group membership column can be located anywhere in the data set (not especially in first or last position).
 \item If \code{type} is \code{"prop"}, the input \code{data} consist in a two-column matrix with one row per item. Each
-row contains the proportions of correct responses, respectively in the reference group (first column) and in the focal group (second column). 
+row contains the proportions of correct responses, respectively in the reference group (first column) and in the focal group (second column).
 \item If \code{type} is \code{"delta"}, the input \code{data} consist in a two-column matrix that is similar to that
 provided with the \code{"prop"} type of input, but with the Delta scores provided instead of the proportions of correct
 responses.
@@ -89,13 +89,13 @@ matrix is specified by giving to argument \code{group} either the column number 
 name (provided the \code{data} matrix has argument names). Moreover, the focal group is specified by giving to the
 argument \code{focal.name} the value that was used in the group membership column to code for the focal group.
 
-If the input \code{type} is not \code{"delta"}, then extreme proportions of correct responses (either provided when 
+If the input \code{type} is not \code{"delta"}, then extreme proportions of correct responses (either provided when
 \code{type} is \code{"prop"} or computed from the data if \code{type} is \code{"response"}) are adjusted by specifying
 the arguments \code{extreme}, \code{const.range} and \code{nrAdd} with appropriate values. See the \code{\link{adjustExtreme}} function for further details (note that the cuyrrent \code{extreme} argument corresponds to the \code{method} argument in this function).
 
 The threshold for flaging items as DIF can be of two types and is specified by the \code{thr} argument.
 \enumerate{
-\item It can be fixed to some arbitrary positive value by the user, for instance 1.5 (Angoff and Ford, 1973). In this 
+\item It can be fixed to some arbitrary positive value by the user, for instance 1.5 (Angoff and Ford, 1973). In this
 case, \code{thr} takes the required numeric threshold value.
 \item Alternatively, it can be derived from the bivariate normal approximation of the Delta points (Magis and Facon, 2012). In this case, \code{thr} must be given the character value \code{"norm"} (which is the default value).
 This threshold equals
@@ -105,12 +105,12 @@ are the sample standard deviations of the Delta scores in the reference group an
 \eqn{s_{01}} is the sample covariance of the Delta scores (see Magis and Facon, 2012, for further details).
 }
 
-Item purification can be performed by setting the argument \code{purify} to \code{TRUE} (by default it is \code{FALSE} so 
+Item purification can be performed by setting the argument \code{purify} to \code{TRUE} (by default it is \code{FALSE} so
 no purification is performed). The item purification process (IPP) starts when at least one item was flagged as DIF after
 the first run of the Delta plot, and proceeds as follows.
 \enumerate{
-\item The intercept and slope parameters of the major axis are re-calculated by removing all DIF that are currently 
-flagged as DIF. This yields updated values \eqn{a^*}, \eqn{b^*}, \eqn{s_0^*}, \eqn{s_1^*} and \eqn{s_{01}^*} of the 
+\item The intercept and slope parameters of the major axis are re-calculated by removing all DIF that are currently
+flagged as DIF. This yields updated values \eqn{a^*}, \eqn{b^*}, \eqn{s_0^*}, \eqn{s_1^*} and \eqn{s_{01}^*} of the
 intercept and slope parameters, sample stanbdard deviations and sample covariance of the Delta scores.
 \item Perpendicular distances (for all items) are updated with respect to the updated major axis.
 \item Detection threshold is also updated. Three possible updates are possible: see below.
@@ -119,12 +119,12 @@ intercept and slope parameters, sample stanbdard deviations and sample covarianc
 back to step 1.
 }
 
-Unlike traditional DIF methods, the detection threshold may also be updated since it depends on the sample estimates (when 
+Unlike traditional DIF methods, the detection threshold may also be updated since it depends on the sample estimates (when
 the normal approximation is considered). Three approaches are currently implemented and are specified by the \code{purType} argument.
 \enumerate{
 \item Method 1 (\code{purType=="IPP1"}): the same threshold is used throughout the purification process, it is not
 iteratively updated. The threshold is the one obtained after the first run of the Delta plot.
-\item Method 2 (\code{purType=="IPP2"}): only the slope parameter is updated in the threshold formula. By this way, one keeps the full data structure (i.e. neither the sample variances nor the sample covariance of the Delta scores are 
+\item Method 2 (\code{purType=="IPP2"}): only the slope parameter is updated in the threshold formula. By this way, one keeps the full data structure (i.e. neither the sample variances nor the sample covariance of the Delta scores are
 modified) but only the slope parameter is adjusted to lessen the impact of DIF items.
 \item Method 3 (\code{purType=="IPP3"}): all adjusted parameters are plugged in the threshold formula. This approach
 completely discards the effect of items flagged as DIF from the computation of the threshold.
@@ -133,14 +133,14 @@ See Magis and Facon (2013) for further details. Note that purification can also 
 specified by the user), but then only IPP1 process is performed.
 
 In order to avoid possible infinite loops in the purification process, a maximal number of iterations must be specified
-through the argument \code{maxIter}. The default maximal number of iterations is 10. 
+through the argument \code{maxIter}. The default maximal number of iterations is 10.
 
 The output contains all input information, the Delta scores and perpendicular distances, the parameter of the major axis
 and the items flagged as DIF (if none, a character sentence is returned). In addition, the detection threshold and the
-type of threshold (fixed or normal approximation) is provided. 
+type of threshold (fixed or normal approximation) is provided.
 
 If item purification was run, several additional elements are returned: the number of iterations, a logical indicator
-whether the convergence was reached (or not, meaning that the process stopped because of reaching the maximal number of 
+whether the convergence was reached (or not, meaning that the process stopped because of reaching the maximal number of
 allowed iterations), a matrix with indicators of which items were flagged as DIF at each iteration, and the type of item
 purification process. Moreover, perpendicular distances are returned in a matrix format (one column per iteration), as
 well as successive major axis parameters (one row per iteration) and successive thresholds (as a vector).
@@ -148,7 +148,7 @@ well as successive major axis parameters (one row per iteration) and successive 
 The output is managed and printed in a more user-friendly way. When item purification is performed, only the first and
 last steps are displayed. Specifying the argument \code{only.final} to \code{FALSE} prints in addition all intermediate steps of the process (successive perpendicular distances, parameters of the major axis, and detection thresholds).
 
-The output can be saved into na text file by specifying the argument \code{save.output} to \code{TRUE} (by default the 
+The output can be saved into na text file by specifying the argument \code{save.output} to \code{TRUE} (by default the
 output is not captured). If so, the argument \code{output} can be specified as a vector of two character values. The first
 one gives the desired name of the text file, and the second one specifies the directory where the file will be saved (full
 path is required but without the final "/" symbol, see \bold{Examples} below). By default, the output will be saved in the current working directory as "out.txt" file.
@@ -163,9 +163,9 @@ Magis, D., and Facon, B. (2012). Angoff's Delta method revisited: improving the 
 
 Magis, D., and Facon, B. (2013). Item purification does not always improve DIF detection: a counter-example with Angoff's Delta plot. \emph{Educational and Psychological Measurement, 73}, 293-311.
 
-Magis, D. and Facon, B. (2014). \emph{deltaPlotR}: An R Package for Differential Item Functioning Analysis with Angoff's Delta Plot. \emph{Journal of Statistical Software, Code Snippets, 59(1)}, 1-19. URL \url{http://www.jstatsoft.org/v59/c01/}
+Magis, D. and Facon, B. (2014). \emph{deltaPlotR}: An R Package for Differential Item Functioning Analysis with Angoff's Delta Plot. \emph{Journal of Statistical Software, Code Snippets, 59(1)}, 1-19. URL \url{https://www.jstatsoft.org/v59/c01/}
 }
- 
+
 
 \seealso{
 \code{\link{adjustExtreme}}
@@ -175,11 +175,11 @@ Magis, D. and Facon, B. (2014). \emph{deltaPlotR}: An R Package for Differential
     David Magis \cr
     Post-doc Fellow of the National Funds for Scientific Research (FNRS, Belgium) \cr
     University of Liege \cr
-    \email{David.Magis@ulg.ac.be}, \url{http://ppw.kuleuven.be/okp/home/} \cr
+    \email{David.Magis@ulg.ac.be}, \url{https://ppw.kuleuven.be/okp/home/} \cr
     Bruno Facon\cr
     Professor, Department of Psychology \cr
     Universite Lille-Nord de France\cr
-    \email{bruno.facon@univ-lille3.fr}, \cr 
+    \email{bruno.facon@univ-lille3.fr}, \cr
     }
 
 \examples{
@@ -192,11 +192,11 @@ Magis, D. and Facon, B. (2014). \emph{deltaPlotR}: An R Package for Differential
  verbal <- verbal[colnames(verbal)!="Anger"]
 
  # Basic Delta plot, threshold 1.5, no item purification
- res <- deltaPlot(data=verbal, type="response", group=25, focal.name=1, purify=FALSE, 
+ res <- deltaPlot(data=verbal, type="response", group=25, focal.name=1, purify=FALSE,
                   thr=1.5)
 
  # Equivalent writing
- res <- deltaPlot(data=verbal, type="response", group="Gender", focal.name=1, 
+ res <- deltaPlot(data=verbal, type="response", group="Gender", focal.name=1,
                   purify=FALSE, thr=1.5)
 
  # Using proportions of correct responses as input
@@ -211,7 +211,7 @@ Magis, D. and Facon, B. (2014). \emph{deltaPlotR}: An R Package for Differential
  res.2 <- deltaPlot(data=Delta, type="delta", purify=FALSE, thr=1.5)
 
  # 'norm' threshold
- res <- deltaPlot(data=verbal, type="response", group="Gender", focal.name=1, 
+ res <- deltaPlot(data=verbal, type="response", group="Gender", focal.name=1,
                   purify=FALSE, thr="norm")
 
  # Keeping the first 10 items to exhibit DIF
@@ -220,20 +220,20 @@ Magis, D. and Facon, B. (2014). \emph{deltaPlotR}: An R Package for Differential
    # Item 8 is flagged as DIF
 
  # Item purification with the three processes
- res0 <- deltaPlot(data=data, type="response", group=11, focal.name=1, purify=TRUE, 
-           thr=1.5, purType="IPP1") 
+ res0 <- deltaPlot(data=data, type="response", group=11, focal.name=1, purify=TRUE,
+           thr=1.5, purType="IPP1")
  res0 # No DIF item detected
 
- res1 <- deltaPlot(data=data, type="response", group=11, focal.name=1, purify=TRUE, 
-           thr="norm", purType="IPP1") 
+ res1 <- deltaPlot(data=data, type="response", group=11, focal.name=1, purify=TRUE,
+           thr="norm", purType="IPP1")
  res1 # Item 8 flagged as DIF after 2 iterations
 
- res2 <- deltaPlot(data=data, type="response", group=11, focal.name=1, purify=TRUE, 
-           thr="norm", purType="IPP2") 
+ res2 <- deltaPlot(data=data, type="response", group=11, focal.name=1, purify=TRUE,
+           thr="norm", purType="IPP2")
  res2 # Item 8 flagged as DIF after 2 iterations
 
- res3 <- deltaPlot(data=data, type="response", group=11, focal.name=1, purify=TRUE, 
-           thr="norm", purType="IPP3") 
+ res3 <- deltaPlot(data=data, type="response", group=11, focal.name=1, purify=TRUE,
+           thr="norm", purType="IPP3")
  res3 # Items 6, 7 and 8 flagged as DIF after 4 iterations
 
  # Printing the full results of item purification

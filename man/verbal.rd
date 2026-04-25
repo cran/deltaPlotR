@@ -10,30 +10,30 @@
 }
 
 \format{
- The \code{verbal} matrix consists of 316 rows (one per subject) and 26 columns. 
+ The \code{verbal} matrix consists of 316 rows (one per subject) and 26 columns.
 
  The first 24 columns hold the responses to the dichotomously scored items. The 25th column holds the trait anger score for each subject. The 26th column is vector of the group membership; values 0 and 1 refer to women and men, respectively.
 
  Each item name starts with \code{S} followed by a value between 1 and 4, referring to one of the situations below:
 
  \emph{S1}: A bus fails to stop for me.
- 
+
  \emph{S2}: I miss a train because a clerk gave me faulty information.
 
  \emph{S3}: The grocery store closes just as I am about to enter.
 
  \emph{S4}: The operator disconnects me when I had used up my last 10 cents for a call.
 
- The second part of the name is either \emph{Want} or \emph{Do}, and indicates whether the subject wanted to respond to the situation or actually did respond. 
+ The second part of the name is either \emph{Want} or \emph{Do}, and indicates whether the subject wanted to respond to the situation or actually did respond.
 
  The third part of the name is one of the possible aggressive responses, either \emph{Curse}, \emph{Scold} or \emph{Shout}.
- 
+
  For example, item \code{S1WantShout} refers to the sentence: "a bus fails to stop for me. I want to shout". The corresponding
  item response is 1 if the subject agrees with that sentence, and 0 if not.
 }
 
 \source{
- The Verbal agression data set is taken originally from Vansteelandt (2000) and has been used as an illustrative example in De Boeck (2008), De Boeck and Wilson (2004) and Smits, De Boeck and Vansteelandt (2004), among others. The following URL \emph{http://bear.soe.berkely.edu/EIRM/} permits to get access to the full data set.
+ The Verbal agression data set is taken originally from Vansteelandt (2000) and has been used as an illustrative example in De Boeck (2008), De Boeck and Wilson (2004) and Smits, De Boeck and Vansteelandt (2004), among others. The following URL \emph{https://bear.soe.berkely.edu/EIRM/} permits to get access to the full data set.
 }
 
 \note{

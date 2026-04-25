@@ -1,9 +1,17 @@
-                **************************************************
+**************************************************
 *                                                *
 *  Changes and Developments in the catR Package  *
 *                                                *
 **************************************************
 
+------------------------------------------
+- Changes in deltaPlotR 1.7 (2026-04-23) -
+------------------------------------------
+
+This is a maintenance release submitted by a new maintainer.
+David Magis (david.magis@ulg.ac.be), the original author and previous
+maintainer, is no longer reachable at his former address. Maintenance
+of the package has been taken over with his agreement.
 
 ------------------------------------------
 - Changes in deltaPlotR 1.6 (2018-03-19) -
@@ -25,7 +33,7 @@ MINOR UPDATES
 MINOR UPDATES
 
   o  The 'diagPlot' function was improved by adding
-     the 'main' argument to allow for including a 
+     the 'main' argument to allow for including a
      main title to the diagonal plot.
 
   o  Some typos were fixed.
@@ -55,14 +63,14 @@ MINOR UPDATES
 
 MINOR UPDATES
 
-  o  A warning message has been added when the 
+  o  A warning message has been added when the
      proportions of corerct responses (or Delta scores)
      are constant in at least one of the groups of
-     respondents. In this case the perpendicular 
+     respondents. In this case the perpendicular
      distances cannot be computed (since variances are
-     equal to zero). This is highly practically 
-     implausible but this would lead to an error message. 
-     Many thanks to an anonymous reviewer who pointed 
+     equal to zero). This is highly practically
+     implausible but this would lead to an error message.
+     Many thanks to an anonymous reviewer who pointed
      out this issue.
 
   o  Some typos were fixed.
